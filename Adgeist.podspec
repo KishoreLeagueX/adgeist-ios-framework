@@ -7,9 +7,11 @@ Pod::Spec.new do |s|
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
   s.authors          = { 'kishore' => 'kishore@thealteroffice.com' }
   s.platform         = :ios, '11.0'
-  s.vendored_frameworks = 'AdgeistCreatives.xcframework'
   s.source           = {
-    :http => 'https://github.com/KishoreLeagueX/adgeist-ios-framework/blob/main/output/AdgeistCreatives.xcframework.zip?raw=true'
+    :http => 'https://github.com/KishoreLeagueX/adgeist-ios-framework.git'
   }
+
+  s.vendored_frameworks = 'AdgeistCreatives.xcframework'
+
   s.requires_arc = true
 end
