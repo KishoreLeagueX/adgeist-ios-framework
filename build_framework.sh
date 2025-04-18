@@ -15,24 +15,28 @@ xcodebuild \
 # Create an archive for iOS devices
 xcodebuild \
     archive \
+        ONLY_ACTIVE_ARCH=NO \
         SKIP_INSTALL=NO \
         BUILD_LIBRARY_FOR_DISTRIBUTION=YES \
         -workspace adgeist-ios-framework.xcworkspace \
         -scheme AdgeistCreatives \
         -configuration Release \
         -destination "generic/platform=iOS" \
-        -archivePath build/AdgeistCreatives-iOS.xcarchive
+        -archivePath build/AdgeistCreatives-iOS.xcarchive \
+         -sdk iphoneos
 
 # Create an archive for iOS simulators
 xcodebuild \
     archive \
+        ONLY_ACTIVE_ARCH=NO \
         SKIP_INSTALL=NO \
         BUILD_LIBRARY_FOR_DISTRIBUTION=YES \
         -workspace adgeist-ios-framework.xcworkspace \
         -scheme AdgeistCreatives \
         -configuration Release \
         -destination "generic/platform=iOS Simulator" \
-        -archivePath build/AdgeistCreatives-iOS_Simulator.xcarchive
+        -archivePath build/AdgeistCreatives-iOS_Simulator.xcarchive \
+        -sdk iphonesimulator
 
 # Convert the archives to .framework
 # and package them both into one xcframework
