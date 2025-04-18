@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = 'AdgeistCreatives'
-  s.version          = '1.0.2'
+  s.version          = '1.0.3'
   s.summary          = 'AdGeist iOS SDK'
   s.description      = 'AdGeist tracking and attribution SDK for iOS apps'
   s.homepage         = 'https://github.com/KishoreLeagueX/adgeist-ios-framework'
@@ -14,9 +14,13 @@ Pod::Spec.new do |s|
   s.ios.deployment_target = '12.0'
 
   s.vendored_frameworks = 'output/AdgeistCreatives.xcframework'
+  s.requires_arc = true
+
   s.pod_target_xcconfig = {
-    'BUILD_LIBRARY_FOR_DISTRIBUTION' => 'YES'
+    'BUILD_LIBRARY_FOR_DISTRIBUTION' => 'YES',
+    'DEFINES_MODULE' => 'YES'
   }
 
-  s.requires_arc = true
+  s.swift_version = '5.0'
 end 
+

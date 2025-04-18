@@ -38,7 +38,7 @@ xcodebuild \
 # and package them both into one xcframework
 xcodebuild \
     -create-xcframework \
-    -archive build/AdgeistCreatives-iOS.xcarchive -framework AdgeistCreatives.framework \
-    -archive build/AdgeistCreatives-iOS_Simulator.xcarchive -framework AdgeistCreatives.framework \
+    -framework build/AdgeistCreatives-iOS.xcarchive/Products/Library/Frameworks/AdgeistCreatives.framework \
+    -framework build/AdgeistCreatives-iOS_Simulator.xcarchive/Products/Library/Frameworks/AdgeistCreatives.framework \
     -output output/AdgeistCreatives.xcframework &&\
     rm -rf build
