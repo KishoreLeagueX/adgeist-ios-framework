@@ -24,7 +24,6 @@ DerivedData/
 # Swift/Obj-C artifacts
 *.swp
 *.swo
-*.modulemap
 
 # Playgrounds
 timeline.xctimeline

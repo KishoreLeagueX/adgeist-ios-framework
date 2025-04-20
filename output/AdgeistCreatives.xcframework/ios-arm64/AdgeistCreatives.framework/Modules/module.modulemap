@@ -1,0 +1,11 @@
+framework module AdgeistCreatives {
+  umbrella header "AdgeistCreatives.h"
+  export *
+
+  module * { export * }
+
+  module AdgeistCreatives.Swift {
+    header "AdgeistCreatives-Swift.h"
+    requires objc
+  }
+}
