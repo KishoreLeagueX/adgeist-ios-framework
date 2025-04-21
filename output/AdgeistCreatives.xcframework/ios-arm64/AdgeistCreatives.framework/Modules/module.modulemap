@@ -1,4 +1,5 @@
 framework module AdgeistCreatives {
   umbrella header "AdgeistCreatives.h"
   export *
+  link "AdgeistCreatives"
 }
