@@ -7,23 +7,23 @@
 
 import Foundation
 
-public struct CreativeDataModel: Codable {
-    public let success: Bool
-    public let message: String
-    public let data: Campaign?
+@objc public class CreativeDataModel: NSObject, Codable {
+    @objc public let success: Bool
+    @objc public let message: String
+    @objc public let data: Campaign?
     
-    public init(success: Bool, message: String, data: Campaign?) {
+    @objc public init(success: Bool, message: String, data: Campaign?) {
         self.success = success
         self.message = message
         self.data = data
     }
 }
 
-public struct Campaign: Codable {
-    public let id: String?
-    public let name: String?
-    public let creative: Creative?
-    public let budgetSettings: BudgetSettings?
+@objc public class Campaign: NSObject, Codable {
+    @objc public let id: String?
+    @objc public let name: String?
+    @objc public let creative: Creative?
+    @objc public let budgetSettings: BudgetSettings?
     
     enum CodingKeys: String, CodingKey {
         case id = "_id"
@@ -32,7 +32,7 @@ public struct Campaign: Codable {
         case budgetSettings
     }
     
-    public init(id: String?, name: String?, creative: Creative?, budgetSettings: BudgetSettings?) {
+    @objc public init(id: String?, name: String?, creative: Creative?, budgetSettings: BudgetSettings?) {
         self.id = id
         self.name = name
         self.creative = creative
@@ -40,17 +40,17 @@ public struct Campaign: Codable {
     }
 }
 
-public struct Creative: Codable {
-    public let title: String?
-    public let description: String?
-    public let fileUrl: String?
-    public let ctaUrl: String?
-    public let type: String?
-    public let fileName: String?
-    public let createdAt: String?
-    public let updatedAt: String?
+@objc public class Creative: NSObject, Codable {
+    @objc public let title: String?
+    @objc public let description: String?
+    @objc public let fileUrl: String?
+    @objc public let ctaUrl: String?
+    @objc public let type: String?
+    @objc public let fileName: String?
+    @objc public let createdAt: String?
+    @objc public let updatedAt: String?
     
-    public init(title: String?,
+    @objc public init(title: String?,
                description: String?,
                fileUrl: String?,
                ctaUrl: String?,
@@ -69,13 +69,12 @@ public struct Creative: Codable {
     }
 }
 
-public struct BudgetSettings: Codable {
-    public let totalBudget: Double
-    public let spentBudget: Double
+@objc public class BudgetSettings: NSObject, Codable {
+    @objc public let totalBudget: Double
+    @objc public let spentBudget: Double
     
-    public init(totalBudget: Double, spentBudget: Double) {
+    @objc public init(totalBudget: Double, spentBudget: Double) {
         self.totalBudget = totalBudget
         self.spentBudget = spentBudget
     }
 }
-

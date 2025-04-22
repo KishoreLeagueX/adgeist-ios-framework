@@ -7,14 +7,14 @@
 
 import Foundation
 
-public class FetchCreative {
+@objc public class FetchCreative: NSObject {
     private let deviceIdentifier: DeviceIdentifier
     
-    init(deviceIdentifier: DeviceIdentifier) {
+    @objc init(deviceIdentifier: DeviceIdentifier) {
         self.deviceIdentifier = deviceIdentifier
     }
     
-    public func fetchCreative(adSpaceId: String, publisherId: String, completion: @escaping (CreativeDataModel?) -> Void) {
+    @objc public func fetchCreative(adSpaceId: String, publisherId: String, completion: @escaping (CreativeDataModel?) -> Void) {
         deviceIdentifier.getDeviceIdentifier { deviceId in
             print("\(deviceId)----------------------------")
             

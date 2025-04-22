@@ -7,14 +7,14 @@
 
 import Foundation
 
-public class CreativeAnalytics {
+@objc public class CreativeAnalytics: NSObject {
     private let deviceIdentifier: DeviceIdentifier
     
-    init(deviceIdentifier: DeviceIdentifier) {
+    @objc init(deviceIdentifier: DeviceIdentifier) {
         self.deviceIdentifier = deviceIdentifier
     }
     
-    public func sendTrackingData(
+    @objc public func sendTrackingData(
         campaignId: String,
         adSpaceId: String,
         publisherId: String,

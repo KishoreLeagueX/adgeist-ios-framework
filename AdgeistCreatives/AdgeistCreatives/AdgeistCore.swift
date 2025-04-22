@@ -7,17 +7,17 @@
 
 import Foundation
 
-public final class AdGeistCore {
-    public static let shared = AdGeistCore()
+@objc public final class AdGeistCore:NSObject {
+    @objc public static let shared = AdGeistCore()
     private init() {}
     
     private let deviceIdentifier = DeviceIdentifier()
     
-    public func getCreative() -> FetchCreative {
+    @objc public func getCreative() -> FetchCreative {
         return FetchCreative(deviceIdentifier: deviceIdentifier)
     }
     
-    public func postCreativeAnalytics() -> CreativeAnalytics {
+    @objc public func postCreativeAnalytics() -> CreativeAnalytics {
         return CreativeAnalytics(deviceIdentifier: deviceIdentifier)
     }
 }

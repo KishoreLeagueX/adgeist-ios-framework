@@ -11,12 +11,50 @@ import AdSupport
 import Security
 
 @available(iOS, introduced: 11.0)
-public final class DeviceIdentifier {
+@objc public final class DeviceIdentifier: NSObject {
     // Keychain key for storing the generated UUID
     private static let keychainKey = "com.adgeist.app.install.id"
     
+    // MARK: - Public Methods
+    
+    @objc public func getDeviceIdentifier(completion: @escaping (String) -> Void) {
+        getAdvertisingID { [weak self] idfa in
+            DispatchQueue.main.async {
+                guard let self = self else { return }
+                
+                // Check if we got a valid IDFA
+                if let idfa = idfa, !idfa.isEmpty, idfa != "00000000-0000-0000-0000-000000000000" {
+                    print(idfa , "idfa")
+                    completion(idfa)
+                    return
+                }
+                
+                // Fallback to Vendor ID alternative
+                if let vendorID = self.getVendorID() {
+                    print(vendorID , "vendor id")
+                    completion(vendorID)
+                    return
+                }
+                
+                // Final fallback to generated UUID
+                let generatedID = self.getOrCreateAppInstallID()
+                print(generatedID , "generated id")
+                completion(generatedID)
+            }
+        }
+    }
+    
+    @objc public func clearGeneratedID() {
+        let query: [String: Any] = [
+            kSecClass as String: kSecClassGenericPassword,
+            kSecAttrAccount as String: DeviceIdentifier.keychainKey
+        ]
+        
+        SecItemDelete(query as CFDictionary)
+    }
+    
     // MARK: - Priority 1: Advertising ID (IDFA)
-
+    
     private func getAdvertisingID(completion: @escaping (String?) -> Void) {
         // Check if advertising tracking is available (not available on simulator)
         guard ASIdentifierManager.shared().isAdvertisingTrackingEnabled else {
@@ -112,43 +150,5 @@ public final class DeviceIdentifier {
             return String(data: data, encoding: .utf8)
         }
         return nil
-    }
-    
-    // MARK: - Public Methods
-    
-    public func getDeviceIdentifier(completion: @escaping (String) -> Void) {
-        getAdvertisingID { [weak self] idfa in
-            DispatchQueue.main.async {
-                guard let self = self else { return }
-                
-                // Check if we got a valid IDFA
-                if let idfa = idfa, !idfa.isEmpty, idfa != "00000000-0000-0000-0000-000000000000" {
-                    print(idfa , "idfa")
-                    completion(idfa)
-                    return
-                }
-                
-                // Fallback to Vendor ID alternative
-                if let vendorID = self.getVendorID() {
-                    print(vendorID , "vendor id")
-                    completion(vendorID)
-                    return
-                }
-                
-                // Final fallback to generated UUID
-                let generatedID = self.getOrCreateAppInstallID()
-                print(generatedID , "generated id")
-                completion(generatedID)
-            }
-        }
-    }
-    
-    public func clearGeneratedID() {
-        let query: [String: Any] = [
-            kSecClass as String: kSecClassGenericPassword,
-            kSecAttrAccount as String: DeviceIdentifier.keychainKey
-        ]
-        
-        SecItemDelete(query as CFDictionary)
     }
 }
